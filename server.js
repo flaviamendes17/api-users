@@ -9,9 +9,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api", userRoutes);
+app.use("/api", postRoutes);
 
 const PORT = process.env.PORT || 4000;
-
 
 
 app.get("/", (req, res) => {
