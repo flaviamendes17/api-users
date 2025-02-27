@@ -1,27 +1,30 @@
 class PostList {
     constructor(){
-        this.users = [];
+        this.posts = []; 
     }
+
     addPost(post){
-        this.users.push(post);
+        this.posts.push(post);
     }
+
     getAllPosts(){
-        return this.users;
+        return this.posts;
     }
+
     getPostById(id){
-        const post = this.users.find(post => post.id === id);
+        const post = this.posts.find(post => post.id === id);
         if (!post) throw new Error("Post não encontrado");
         return post;
     }
-    updatePost(id, newPost){
-        const postIndex = this.users.findIndex(post => post.id === id);
-        if (postIndex === -1) throw new Error("Post não encontrado");
-        this.users[postIndex] = newPost;
-        return newPost;
+
+    updatePost(id, updateData){
+        const post = this.getPostById(id);
+        Object.assign(post, updateData);
+        return post;
     }
+
     deletePost(id){
-    this.posts = this.posts.filter(post => post.id !==
-    id);
+        this.posts = this.posts.filter(post => post.id !== id);
     }
 }
 

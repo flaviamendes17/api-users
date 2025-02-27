@@ -1,13 +1,17 @@
 const Post = require('../models/Post');
 const PostList = require('../models/PostList');
-
 const lista = new PostList();
 
-lista.addPost(new Post('2', ['imagem.jpg'], 30, ['comentario1', 'comentario2'], 10));
+const post1 = new Post(1, "https://www.google.com", 10, 5, 2);
+lista.addPost(post1);
 
 const router = {
     getAllPosts: (req, res) => {
-        res.json(lista.getAllPosts());
+        try {
+            res.json(lista.getAllPosts());
+        } catch (error) {
+            res.status(404).json({ message: "Erro ao buscar os posts", error });
+        }
     },
     
     getPostById: (req, res) => {
