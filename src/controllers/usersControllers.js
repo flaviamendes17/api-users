@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const UserList = require('../models/UserList');
+const listaPosts = require('../data/postListInstance'); // Corrigido para usar a instância correta de PostList
 
 const lista = new UserList();
 
@@ -45,6 +46,16 @@ const router = {
     deleteUser: (req, res) => {
         lista.deleteUser(req.params.id);
         res.status(200).json({ message: "Usuário deletado com sucesso", IdDeletado: req.params.id });
+    },
+
+    getPostsByUserId: (req, res) => {
+        try {
+            const userId = req.params.id;
+            const posts = listaPosts.getPostById(userId); 
+            res.json(posts);
+        } catch (error) {
+            res.status(404).json({ message: "Erro ao buscar os posts do usuário", error });
+        }
     }
 };
 

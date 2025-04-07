@@ -1,6 +1,5 @@
 const Post = require('../models/Post');
-const PostList = require('../models/PostList');
-const lista = new PostList();
+const lista = require('../data/postListInstance');
 
 const post1 = new Post(1, "https://www.google.com", 10, 5, 2);
 lista.addPost(post1);
