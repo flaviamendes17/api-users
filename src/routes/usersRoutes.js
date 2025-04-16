@@ -1,8 +1,8 @@
 const express = require('express');
-
 const router = express.Router();
+const usersControllers = require('../controllers/usersControllers'); 
 
-const usersControllers = require('../controllers/usersControllers');
+
 
 /**
   * @swagger
@@ -15,12 +15,12 @@ const usersControllers = require('../controllers/usersControllers');
   * @swagger
   * /api/users:
   *   get:
-  *     summary: Lista todos os usuários
+  *     summary: Retorna todos os usuários
   *     tags: [users]
   *     responses:
   *       200:
   *         description: Lista de usuários
-  */
+ */
 router.get('/', usersControllers.getAllUsers);
 
 /**
@@ -37,18 +37,17 @@ router.get('/', usersControllers.getAllUsers);
   *           type: integer
   *     responses:
   *       200:
-  *         description: usuário encontrada
+  *         description: usuário encontrado
   *       404:
-  *         description: usuário não encontrada
+  *         description: usuário não encontrado
   */
 router.get('/:id', usersControllers.getUserById);
 
-
- /**
+/**
   * @swagger
   * /api/users:
   *   post:
-  *     summary: Cria uma nova usuário
+  *     summary: Cria uma novo usuário
   *     tags: [users]
   *     requestBody:
   *       required: true
@@ -63,16 +62,15 @@ router.get('/:id', usersControllers.getUserById);
   *                 type: string
   *     responses:
   *       201:
-  *         description: usuário criada
+  *         description: usuário criado
   */
 router.post('/', usersControllers.addUser);
 
-
- /**
+/**
   * @swagger
   * /api/users/{id}:
   *   put:
-  *     summary: Atualiza uma usuário
+  *     summary: Atualiza um usuário
   *     tags: [users]
   *     parameters:
   *       - in: path
@@ -93,7 +91,7 @@ router.post('/', usersControllers.addUser);
   *                 type: string
   *     responses:
   *       200:
-  *         description: usuário atualizada
+  *         description: usuário atualizado
   */
 router.put('/:id', usersControllers.updateUser);
 
@@ -101,7 +99,7 @@ router.put('/:id', usersControllers.updateUser);
   * @swagger
   * /api/users/{id}:
   *   delete:
-  *     summary: Deleta uma usuário
+  *     summary: Deleta um usuário
   *     tags: [users]
   *     parameters:
   *       - in: path
@@ -111,9 +109,8 @@ router.put('/:id', usersControllers.updateUser);
   *           type: integer
   *     responses:
   *       200:
-  *         description: usuário deletada
+  *         description: usuário deletado
   */
 router.delete('/:id', usersControllers.deleteUser);
-router.get('/:id/posts', usersControllers.getPostsByUserId);
 
 module.exports = router;

@@ -1,6 +1,6 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const postController = require("../controllers/postControllers");
+const postControllers = require('../controllers/postControllers'); 
 
 /**
   * @swagger
@@ -14,18 +14,21 @@ const postController = require("../controllers/postControllers");
   * /api/post:
   *   get:
   *     summary: Lista todos os posts
-  *     tags: [post]
-  *     responses:
-  *       200:
-  *         description: Lista de posts
+  *     tags: [posts]
+  *     parameters:
+  *       - in: query
+  *         name: name
+  *         schema:
+  *           type: string
+  *         description: Filtro por nome
   */
-router.get('/',postController.getAllPosts);
+router.get('/', postControllers.getAllPosts);
 
 /**
   * @swagger
   * /api/post/{id}:
   *   get:
-  *     summary: Busca usuário por ID
+  *     summary: Busca post por ID
   *     tags: [posts]
   *     parameters:
   *       - in: path
@@ -35,18 +38,18 @@ router.get('/',postController.getAllPosts);
   *           type: integer
   *     responses:
   *       200:
-  *         description: usuário encontrada
+  *         description: post encontrada
   *       404:
-  *         description: usuário não encontrada
+  *         description: post não encontrada
   */
-router.get('/:id',postController.getPostById);
+router.get('/:id', postControllers.getPostById);
 
 
- /**
+/**
   * @swagger
   * /api/post:
   *   post:
-  *     summary: Cria uma nova usuário
+  *     summary: Cria um novo post
   *     tags: [posts]
   *     requestBody:
   *       required: true
@@ -61,16 +64,16 @@ router.get('/:id',postController.getPostById);
   *                 type: string
   *     responses:
   *       201:
-  *         description: usuário criada
+  *         description: post criado
   */
-router.post('/',postController.addPost);
+router.post('/', postControllers.addPost);
 
 
- /**
+/**
   * @swagger
   * /api/post/{id}:
   *   put:
-  *     summary: Atualiza uma usuário
+  *     summary: Atualiza uma post
   *     tags: [posts]
   *     parameters:
   *       - in: path
@@ -93,14 +96,14 @@ router.post('/',postController.addPost);
   *       200:
   *         description: post atualizado
   */
-router.put('/:id', postController.updatePost);
+router.put('/:id', postControllers.updatePost);
 
 /**
   * @swagger
   * /api/post/{id}:
   *   delete:
   *     summary: Deleta um post
-  *     tags: [post]
+  *     tags: [posts]
   *     parameters:
   *       - in: path
   *         name: id
@@ -111,7 +114,6 @@ router.put('/:id', postController.updatePost);
   *       200:
   *         description: post deletado
   */
-router.delete('/:id', postController.deletePost);
-router.get('/:id/posts', postController.getPostById);
+router.delete('/:id', postControllers.deletePost);
 
 module.exports = router;

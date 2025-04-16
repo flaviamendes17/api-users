@@ -7,24 +7,24 @@ const postRoutes = require("./src/routes/postRoutes");
 
 const app = express();
 
-const setupSwagger = require('./src/config/swagger.js'); // Caminho até o arquivo
-setupSwagger(app);
+const setupSwaggerUI = require('./src/config/swagger'); 
+setupSwaggerUI(app);
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/user", userRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes); 
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use("/docs", express.static("docs"));
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
   res.send("Eu amo BackEnd");
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
